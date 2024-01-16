@@ -36,6 +36,7 @@ import (
 	"github.com/dexidp/dex/connector/keystone"
 	"github.com/dexidp/dex/connector/ldap"
 	"github.com/dexidp/dex/connector/linkedin"
+	"github.com/dexidp/dex/connector/mailru"
 	"github.com/dexidp/dex/connector/microsoft"
 	"github.com/dexidp/dex/connector/mock"
 	"github.com/dexidp/dex/connector/oauth"
@@ -571,6 +572,7 @@ var ConnectorsConfig = map[string]func() ConnectorConfig{
 	"google":          func() ConnectorConfig { return new(google.Config) },
 	"oidc":            func() ConnectorConfig { return new(oidc.Config) },
 	"oauth":           func() ConnectorConfig { return new(oauth.Config) },
+	"mailru":          func() ConnectorConfig { return new(mailru.Config) },
 	"saml":            func() ConnectorConfig { return new(saml.Config) },
 	"authproxy":       func() ConnectorConfig { return new(authproxy.Config) },
 	"linkedin":        func() ConnectorConfig { return new(linkedin.Config) },
