@@ -191,7 +191,12 @@ func (c *oauthConnector) HandleCallback(s connector.Scopes, r *http.Request) (id
 	identity.Username, _ = userInfoResult[c.userNameKey].(string)
 	identity.PreferredUsername, _ = userInfoResult[c.preferredUsernameKey].(string)
 	identity.Email, _ = userInfoResult[c.emailKey].(string)
-	identity.EmailVerified, _ = userInfoResult[c.emailVerifiedKey].(bool)
+	if emailVerified, ok := userInfoResult[c.emailVerifiedKey].(bool); ok {
+		identity.EmailVerified = emailVerified
+	} else {
+		// If the email_verified claim is not present, we assume the email is verified.
+		identity.EmailVerified = true
+	}
 
 	if s.Groups {
 		groups := map[string]struct{}{}
